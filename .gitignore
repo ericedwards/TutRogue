@@ -9,3 +9,11 @@ buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
+TutRogue.iml
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/libraries/Maven__net_trystan_ascii_panel_1_2_SNAPSHOT.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
