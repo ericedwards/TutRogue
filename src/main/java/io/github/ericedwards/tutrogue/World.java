@@ -37,4 +37,22 @@ public class World {
         return getTile(x, y).color();
     }
 
+    public void dig(int x, int y) {
+        if (getTile(x, y).isDiggable())
+            tiles[x][y] = Tile.FLOOR;
+    }
+
+    public void addAtEmptyLocation(Creature creature){
+        int x;
+        int y;
+
+        do {
+            x = (int)(Math.random() * width);
+            y = (int)(Math.random() * height);
+        }
+        while (!getTile(x,y).isGround());
+
+        creature.x = x;
+        creature.y = y;
+    }
 }
