@@ -53,4 +53,12 @@ public class Creature {
     public void attack(Creature other){
         world.removeCreature(other);
     }
+
+    public void update(){
+        creatureAi.onUpdate();
+    }
+
+    public boolean canEnter(int wx, int wy) {
+        return world.getTile(wx, wy).isGround() && world.getCreatureAt(wx, wy) == null;
+    }
 }

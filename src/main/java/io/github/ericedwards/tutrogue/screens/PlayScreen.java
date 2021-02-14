@@ -107,6 +107,7 @@ public class PlayScreen implements Screen {
             case KeyEvent.VK_ENTER:
                 return new WinScreen();
         }
+        world.update();
         return this;
     }
 }

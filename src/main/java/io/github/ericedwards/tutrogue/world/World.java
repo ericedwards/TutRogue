@@ -1,7 +1,6 @@
 package io.github.ericedwards.tutrogue.world;
 
 import io.github.ericedwards.tutrogue.creatures.Creature;
-import io.github.ericedwards.tutrogue.world.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -50,14 +49,14 @@ public class World {
         }
     }
 
-    public void addAtEmptyLocation(Creature creature) {
+    public void addCreatureAtEmptyLocation(Creature creature) {
         int x;
         int y;
         do {
             x = (int) (Math.random() * width);
             y = (int) (Math.random() * height);
         }
-        while (!getTile(x, y).isGround() || getCreatureAt(x,y) != null);
+        while (!getTile(x, y).isGround() || getCreatureAt(x, y) != null);
         creature.x = x;
         creature.y = y;
         creatures.add(creature);
@@ -77,5 +76,12 @@ public class World {
 
     public void removeCreature(Creature other) {
         creatures.remove(other);
+    }
+
+    public void update() {
+        List<Creature> creaturesCopy = new ArrayList<>(creatures);
+        for (Creature creature : creaturesCopy) {
+            creature.update();
+        }
     }
 }
