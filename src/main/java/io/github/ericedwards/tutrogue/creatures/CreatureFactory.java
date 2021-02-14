@@ -3,6 +3,8 @@ package io.github.ericedwards.tutrogue.creatures;
 import asciiPanel.AsciiPanel;
 import io.github.ericedwards.tutrogue.world.World;
 
+import java.util.List;
+
 public class CreatureFactory {
 
     private World world;
@@ -11,10 +13,10 @@ public class CreatureFactory {
         this.world = world;
     }
 
-    public Creature newPlayer(){
+    public Creature newPlayer(List<String> messages){
         Creature player = new Creature(world, '@', AsciiPanel.brightWhite, 100, 20, 5);
         world.addCreatureAtEmptyLocation(player);
-        new PlayerAi(player);
+        new PlayerAi(player, messages);
         return player;
     }
 

@@ -7,6 +7,8 @@ import io.github.ericedwards.tutrogue.world.World;
 import io.github.ericedwards.tutrogue.world.WorldBuilder;
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PlayScreen implements Screen {
 
@@ -14,17 +16,20 @@ public class PlayScreen implements Screen {
     private final int screenWidth;
     private final int screenHeight;
     private Creature player;
+    private final List<String> messages;
 
     public PlayScreen() {
         screenWidth = 80;
         screenHeight = 21;
         createWorld();
+        messages = new ArrayList<>();
+        messages.add("You are having fun.");
         CreatureFactory creatureFactory = new CreatureFactory(world);
-        createCreatures(creatureFactory);
+        createCreatures(creatureFactory, messages);
     }
 
-    private void createCreatures(CreatureFactory creatureFactory) {
-        player = creatureFactory.newPlayer();
+    private void createCreatures(CreatureFactory creatureFactory, List<String> messages) {
+        player = creatureFactory.newPlayer(messages);
         for (int i = 0; i < 8; i++) {
             creatureFactory.newFungus();
         }
@@ -64,12 +69,20 @@ public class PlayScreen implements Screen {
         }
     }
 
+    private void displayMessages(AsciiPanel terminal, List<String> messages) {
+        int top = screenHeight - messages.size();
+        for (int i = 0; i < messages.size(); i++){
+            terminal.writeCenter(messages.get(i), top + i);
+        }
+        messages.clear();
+    }
+
     @Override
     public void displayOutput(AsciiPanel terminal) {
         int left = getScrollX();
         int top = getScrollY();
         displayTiles(terminal, left, top);
-        // terminal.write(player.getGlyph(), player.x - left, player.y - top, player.getColor()); FIXME NOT NEEDED
+        displayMessages(terminal, messages);
         String stats = String.format(" %3d/%3d hp", player.getHp(), player.getMaxHp());
         terminal.write(stats, 1, 23);
     }
