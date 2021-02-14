@@ -21,6 +21,9 @@ public class PlayScreen implements Screen {
         createWorld();
         CreatureFactory creatureFactory = new CreatureFactory(world);
         player = creatureFactory.newPlayer();
+        for (int i = 0; i < 8; i++) {
+            creatureFactory.newFungus();
+        }
     }
 
     private void createWorld() {
@@ -43,6 +46,12 @@ public class PlayScreen implements Screen {
                 int wx = x + left;
                 int wy = y + top;
                 terminal.write(world.getGlyph(wx, wy), x, y, world.getColor(wx, wy));
+            }
+        }
+        for (Creature creature : world.getCreatures()) {
+            if (creature.x >= left && creature.x < (left + screenWidth)
+                    && creature.y >= top && creature.y < (top + screenHeight)) {
+                terminal.write(creature.getGlyph(), creature.x - left, creature.y - top, creature.getColor());
             }
         }
     }
