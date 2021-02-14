@@ -1,4 +1,7 @@
-package io.github.ericedwards.tutrogue;
+package io.github.ericedwards.tutrogue.world;
+
+import io.github.ericedwards.tutrogue.creatures.Creature;
+import io.github.ericedwards.tutrogue.world.Tile;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -67,7 +70,12 @@ public class World {
         }
         return null;
     }
+
     public List<Creature> getCreatures() {
         return creatures;
+    }
+
+    public void removeCreature(Creature other) {
+        creatures.remove(other);
     }
 }

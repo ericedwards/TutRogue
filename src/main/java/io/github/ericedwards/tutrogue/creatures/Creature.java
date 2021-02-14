@@ -1,4 +1,6 @@
-package io.github.ericedwards.tutrogue;
+package io.github.ericedwards.tutrogue.creatures;
+
+import io.github.ericedwards.tutrogue.world.World;
 
 import java.awt.*;
 
@@ -29,7 +31,7 @@ public class Creature {
         this.creatureAi = creatureAi;
     }
 
-    public Creature(World world, char glyph, Color color){
+    public Creature(World world, char glyph, Color color) {
         this.world = world;
         this.glyph = glyph;
         this.color = color;
@@ -39,7 +41,16 @@ public class Creature {
         world.dig(wx, wy);
     }
 
-    public void moveBy(int mx, int my){
-        creatureAi.onEnter(x+mx, y+my, world.getTile(x+mx, y+my));
+    public void moveBy(int mx, int my) {
+        Creature other = world.getCreatureAt(x + mx, y + my);
+        if (other == null) {
+            creatureAi.onEnter(x + mx, y + my, world.getTile(x + mx, y + my));
+        } else {
+            attack(other);
+        }
+    }
+
+    public void attack(Creature other){
+        world.removeCreature(other);
     }
 }

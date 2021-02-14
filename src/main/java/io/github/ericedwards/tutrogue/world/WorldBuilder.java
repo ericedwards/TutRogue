@@ -1,4 +1,4 @@
-package io.github.ericedwards.tutrogue;
+package io.github.ericedwards.tutrogue.world;
 
 public class WorldBuilder {
 

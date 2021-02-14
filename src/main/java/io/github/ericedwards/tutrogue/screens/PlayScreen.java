@@ -1,10 +1,10 @@
 package io.github.ericedwards.tutrogue.screens;
 
 import asciiPanel.AsciiPanel;
-import io.github.ericedwards.tutrogue.Creature;
-import io.github.ericedwards.tutrogue.CreatureFactory;
-import io.github.ericedwards.tutrogue.World;
-import io.github.ericedwards.tutrogue.WorldBuilder;
+import io.github.ericedwards.tutrogue.creatures.Creature;
+import io.github.ericedwards.tutrogue.creatures.CreatureFactory;
+import io.github.ericedwards.tutrogue.world.World;
+import io.github.ericedwards.tutrogue.world.WorldBuilder;
 
 import java.awt.event.KeyEvent;
 
@@ -20,6 +20,10 @@ public class PlayScreen implements Screen {
         screenHeight = 21;
         createWorld();
         CreatureFactory creatureFactory = new CreatureFactory(world);
+        createCreatures(creatureFactory);
+    }
+
+    private void createCreatures(CreatureFactory creatureFactory) {
         player = creatureFactory.newPlayer();
         for (int i = 0; i < 8; i++) {
             creatureFactory.newFungus();
@@ -33,11 +37,13 @@ public class PlayScreen implements Screen {
     }
 
     public int getScrollX() {
-        return Math.max(0, Math.min(player.x - screenWidth / 2, world.getWidth() - screenWidth));
+        return Math.max(0,
+                Math.min(player.x - screenWidth / 2, world.getWidth() - screenWidth));
     }
 
     public int getScrollY() {
-        return Math.max(0, Math.min(player.y - screenHeight / 2, world.getHeight() - screenHeight));
+        return Math.max(0,
+                Math.min(player.y - screenHeight / 2, world.getHeight() - screenHeight));
     }
 
     private void displayTiles(AsciiPanel terminal, int left, int top) {
@@ -51,7 +57,8 @@ public class PlayScreen implements Screen {
         for (Creature creature : world.getCreatures()) {
             if (creature.x >= left && creature.x < (left + screenWidth)
                     && creature.y >= top && creature.y < (top + screenHeight)) {
-                terminal.write(creature.getGlyph(), creature.x - left, creature.y - top, creature.getColor());
+                terminal.write(creature.getGlyph(),
+                        creature.x - left, creature.y - top, creature.getColor());
             }
         }
     }

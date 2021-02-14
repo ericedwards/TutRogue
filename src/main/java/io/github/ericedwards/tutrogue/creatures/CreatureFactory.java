@@ -1,6 +1,7 @@
-package io.github.ericedwards.tutrogue;
+package io.github.ericedwards.tutrogue.creatures;
 
 import asciiPanel.AsciiPanel;
+import io.github.ericedwards.tutrogue.world.World;
 
 public class CreatureFactory {
 

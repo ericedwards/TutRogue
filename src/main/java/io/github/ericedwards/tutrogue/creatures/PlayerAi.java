@@ -1,4 +1,6 @@
-package io.github.ericedwards.tutrogue;
+package io.github.ericedwards.tutrogue.creatures;
+
+import io.github.ericedwards.tutrogue.world.Tile;
 
 public class PlayerAi extends CreatureAi {
 
