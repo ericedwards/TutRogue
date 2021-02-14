@@ -11,8 +11,8 @@ import java.awt.event.KeyEvent;
 public class PlayScreen implements Screen {
 
     private World world;
-    private int screenWidth;
-    private int screenHeight;
+    private final int screenWidth;
+    private final int screenHeight;
     private Creature player;
 
     public PlayScreen() {
@@ -28,6 +28,7 @@ public class PlayScreen implements Screen {
         for (int i = 0; i < 8; i++) {
             creatureFactory.newFungus();
         }
+        creatureFactory.newDarkElf();
     }
 
     private void createWorld() {
@@ -68,7 +69,9 @@ public class PlayScreen implements Screen {
         int left = getScrollX();
         int top = getScrollY();
         displayTiles(terminal, left, top);
-        terminal.write(player.getGlyph(), player.x - left, player.y - top, player.getColor());
+        // terminal.write(player.getGlyph(), player.x - left, player.y - top, player.getColor()); FIXME NOT NEEDED
+        String stats = String.format(" %3d/%3d hp", player.getHp(), player.getMaxHp());
+        terminal.write(stats, 1, 23);
     }
 
     @Override
